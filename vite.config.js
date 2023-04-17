@@ -8,10 +8,5 @@ export default defineConfig({
       "/api": "http://127.0.0.1:3000"
     } 
   },  
-  css: {
-    postcss: {
-      plugins: [require('tailwindcss')],
-    },
-  },
 });
 
