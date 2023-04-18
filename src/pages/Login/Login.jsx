@@ -1,65 +1,45 @@
-import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { signUp } from "../../utilities/users-service";
+import { getUser, login } from "../../utilities/users-service";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const SignUp = ({ setUser }) => {
+const Login = ({ setUser }) => {
   const navigate = useNavigate();
-  const [state, setState] = useState({
-    name: "",
+  const [credentials, setCredentials] = useState({
     email: "",
     password: "",
-    confirm: "",
   });
-  const disable = state.password !== state.confirm;
+
   const [error, setError] = useState("");
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     try {
-      await signUp(state);
+      const user = await login(credentials);
       setUser(getUser());
       navigate("/");
-    } catch (error) {
-      if (error.message.includes("email")) {
-        setError("This email already has an account");
-      } else {
-        setError(error.message);
-      }
+    } catch {
+      setError("Login failed. Try again.");
     }
   };
+
   const handleChange = (evt) => {
-    setState({
-      ...state,
+    setCredentials({
+      ...credentials,
       [evt.target.name]: evt.target.value,
-      error: "",
     });
+    setError("");
   };
 
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col">
         <div className="text-center lg:text-center">
-          <h1 className="text-4xl font-bold">Create Account</h1>
+          <h1 className="text-4xl font-bold">Welcome Back!</h1>
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <div className="card-body">
             <form autoComplete="off" onSubmit={handleSubmit}>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Name</span>
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="name"
-                  className="input input-bordered"
-                  value={state.name}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
@@ -69,7 +49,7 @@ const SignUp = ({ setUser }) => {
                   name="email"
                   placeholder="email"
                   className="input input-bordered"
-                  value={state.email}
+                  value={credentials.email}
                   onChange={handleChange}
                   required
                 />
@@ -83,42 +63,24 @@ const SignUp = ({ setUser }) => {
                   name="password"
                   placeholder="password"
                   className="input input-bordered"
-                  value={state.password}
+                  value={credentials.password}
                   onChange={handleChange}
                   required
                 />
-          
-                <label className="label">
-                  <span className="label-text">Confirm Password</span>
-                </label>
-                <input
-                  type="password"
-                  name="confirm"
-                  placeholder="Confirm Password"
-                  className="input input-bordered"
-                  value={state.confirm}
-                  onChange={handleChange}
-                  required
-                />
-
                 <label className="label">
                   <Link
-                    to="/user/login"
+                    to="/user/signup"
                     className="label-text-alt link link-hover"
                   >
-                    Have an account? Login here.
+                    No Account? Create one!
                   </Link>
                 </label>
               </div>
               <div className="form-control mt-6">
-                <button
-                  className="btn btn-info"
-                  type="submit"
-                  disabled={disable}
-                >
-                  Sign Up
+                <button className="btn btn-warning" type="submit">
+                  Login
                 </button>
-                <p className="error-message">&nbsp;{state.error}</p>
+                <p className="error-message">&nbsp;{credentials.error}</p>
               </div>
             </form>
           </div>
@@ -128,4 +90,4 @@ const SignUp = ({ setUser }) => {
   );
 };
 
-export default SignUp;
+export default Login;

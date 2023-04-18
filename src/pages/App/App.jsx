@@ -1,30 +1,30 @@
-import { useState } from 'react'
-import { Routes, Route } from 'react-router-dom';
-import Location from '../Location/Location'
+import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import { getUser } from "../../utilities/users-service";
+import Map from "../Map/Map";
 import NavBar from "../../components/NavBar/NavBar";
-import Bookmark from '../Bookmark/Bookmark';
-import SignUp from '../SignUp/SignUp';
+import Bookmarks from "../Bookmarks/Bookmarks";
+import SignUp from "../SignUp/SignUp";
+import Login from "../Login/Login";
+import Search from "../Search/search";
+
+
 
 const App = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(getUser());
 
-  return(
-  <>
-  <NavBar />
-    <h2>
-      Hello world!
-    </h2>
-    <h1>App Page</h1>
-    <Location />
-  <Routes>
-    <Route path="/user/bookmark" element={<Bookmark />} />
-    <Route path="/user/signup" element={<SignUp />} />
-  </Routes>
-  
-  
-  </>
-  
-  )
-}
+  return (
+    <>
+      <NavBar user={user} setUser={setUser}/>
+      <Routes>
+        <Route path="/" element={<Map />} />
+        <Route path="/user/bookmarks" element={<Bookmarks user={user} />} />
+        <Route path="/user/signup" element={<SignUp setUser={setUser} />} />
+        <Route path="/user/login" element={<Login setUser={setUser} />} />
+        <Route path="/location/search" element={<Search />} />
+      </Routes>
+    </>
+  );
+};
 
 export default App;

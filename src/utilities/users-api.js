@@ -1,7 +1,7 @@
 export async function signUp(userData) {
   // Fetch uses an options object as a second arg to make requests
   // other than basic GET requests, include data, headers, etc.
-  const res = await fetch("/api/users/register", {
+  const res = await fetch("/api/user/signup", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     // Fetch requires data payloads to be stringified
@@ -23,7 +23,7 @@ export async function signUp(userData) {
 export async function login(userData) {
   // Fetch uses an options object as a second arg to make requests
   // other than basic GET requests, include data, headers, etc.
-  const res = await fetch("/api/users/login", {
+  const res = await fetch("/api/user/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     // Fetch requires data payloads to be stringified

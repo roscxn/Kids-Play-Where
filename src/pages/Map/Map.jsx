@@ -1,7 +1,7 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 
-const Location = () => {
+const Map = () => {
   const position = [1.3521, 103.8198];
 
   const southWest = L.latLng(1.16, 103.59);
@@ -23,4 +23,4 @@ const Location = () => {
   );
 };
 
-export default Location;
+export default Map;
