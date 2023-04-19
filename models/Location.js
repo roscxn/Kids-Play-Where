@@ -8,6 +8,11 @@ const reviewSchema = new Schema({
 })
 
 const locationSchema = new Schema({
+    locationName: {
+        type: String,
+        required: true,
+        maxLength: 200
+    },
     address: { 
         type: String, 
         required: true, 
@@ -24,16 +29,12 @@ const locationSchema = new Schema({
         maxLength: 200, 
         required: true 
     },
-    openingHours: {
+    website: {
         type: String,
         required: true
     },
-    ageGroup: [{
+    ageGroup: {
         type: String,
-        required: true
-    }],
-    fees: {
-        type: String, 
         required: true
     },
     latitude: { 

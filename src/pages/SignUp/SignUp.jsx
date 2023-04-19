@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { signUp } from "../../utilities/users-service";
+import { getUser, signUp } from "../../utilities/users-service";
 import { useNavigate } from "react-router-dom";
 
 const SignUp = ({ setUser }) => {
@@ -12,6 +12,7 @@ const SignUp = ({ setUser }) => {
     password: "",
     confirm: "",
   });
+
   const disable = state.password !== state.confirm;
   const [error, setError] = useState("");
 
@@ -33,8 +34,8 @@ const SignUp = ({ setUser }) => {
     setState({
       ...state,
       [evt.target.name]: evt.target.value,
-      error: "",
     });
+    setError("");
   };
 
   return (
@@ -85,9 +86,10 @@ const SignUp = ({ setUser }) => {
                   className="input input-bordered"
                   value={state.password}
                   onChange={handleChange}
+                  minLength={8}
                   required
                 />
-          
+
                 <label className="label">
                   <span className="label-text">Confirm Password</span>
                 </label>
@@ -98,6 +100,7 @@ const SignUp = ({ setUser }) => {
                   className="input input-bordered"
                   value={state.confirm}
                   onChange={handleChange}
+                  minLength={8}
                   required
                 />
 
@@ -118,7 +121,6 @@ const SignUp = ({ setUser }) => {
                 >
                   Sign Up
                 </button>
-                <p className="error-message">&nbsp;{state.error}</p>
               </div>
             </form>
           </div>

@@ -1,0 +1,26 @@
+const Location = require('../models/Location');
+
+const showMap = (req, res) => {
+    Location.find({})
+      .then(locations => {
+        res.json(locations);
+    })
+      .catch(err => {
+        console.error(err);
+        res.status(500).json({ error: 'Error retrieving locations from database.' });
+    });
+}
+
+const viewAll = async (req, res) => {
+  try {
+    const locations = await Location.find({});
+    res.status(200).send(locations);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+}
+
+module.exports = { 
+    showMap,
+    viewAll
+};

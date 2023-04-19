@@ -6,6 +6,7 @@ require('./config/database');
 
 const app = express();
 const usersRouter = require("./routes/usersRouter");
+const locationRouter = require("./routes/locationRouter");
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use(require('./config/checkToken'));
 app.use("/api/user", usersRouter);
+app.use("/api/location", locationRouter);
 
 const port = process.env.PORT || 3000;
 
@@ -20,7 +22,7 @@ app.get("/api", (req, res) => {
   res.send("Hi!");
 });
 
-app.get('*', function(req, res) {
+app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 

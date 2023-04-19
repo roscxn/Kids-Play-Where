@@ -65,6 +65,7 @@ const Login = ({ setUser }) => {
                   className="input input-bordered"
                   value={credentials.password}
                   onChange={handleChange}
+                  minLength={8}
                   required
                 />
                 <label className="label">
