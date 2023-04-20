@@ -47,7 +47,7 @@ const Map = () => {
           icon={blackIcon}
         >
           <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
+            {location.locationName}<br/> {location.description}<br />
           </Popup>
         </Marker>
       ))}
