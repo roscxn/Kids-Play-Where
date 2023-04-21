@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ReviewsForm from "../Reviews/ReviewsForm";
+import Reviews from "../Reviews/Reviews";
 
 const LocationDetails = ({ user }) => {
   const { id } = useParams();
@@ -65,7 +66,6 @@ const LocationDetails = ({ user }) => {
 
   return (
     <>
-    
       <h1 className="text-5xl font-bold">{location.locationName}</h1> <br />
       <img src={location.image} alt="Location Image" className="w-100 h-96" />
       <br />
@@ -80,8 +80,10 @@ const LocationDetails = ({ user }) => {
           </button>
         </>
       )}
-
-      <><ReviewsForm /></>
+      <>
+        <Reviews location={location} user={user} />
+        <ReviewsForm user={user} />
+      </>
     </>
   );
 };

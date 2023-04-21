@@ -1,16 +1,6 @@
 const Location = require('../models/Location');
 const User = require('../models/User')
 
-// const showReview = async (req, res) => {
-//   try {
-//     const reviews = await Location.find({});
-//     console.log("REVIEWS")
-//     res.status(200).send(reviews);
-//   } catch (error) {
-//     res.status(400).json({ error: error.message });
-//   }
-// }
-
 const createReview = async (req, res) => {
   const user = await User.findOne(req.body.user)
     if (!user) {
@@ -36,8 +26,22 @@ const createReview = async (req, res) => {
     }
 };
 
+const showReviews = async (req, res) => {
+  try {
+    const location = await Location.findById(req.params.id);
+    if (!location) {
+      return res.status(404).send('Location not found');
+    }
+    const reviews = { ...location.reviews };
+    res.status(200).send(reviews);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+
 
 module.exports = {
-    // showReview,
-    createReview
+    createReview,
+    showReviews
 }

@@ -59,6 +59,11 @@ const deleteBookmark = async (req, res) => {
   }     
   };
 
+
+
+
+  
+
 // const addBookmarkCard = async (req, res) => {
 
 //   const user = await User.findById(req.body._id);
@@ -94,12 +99,14 @@ const deleteBookmark = async (req, res) => {
 
 
 
+
 module.exports = { 
     showMap,
     viewAll,
     show,
     addBookmark,
-    deleteBookmark,
+    deleteBookmark
+
     // addBookmarkCard,
     // deleteBookmarkCard
 };
