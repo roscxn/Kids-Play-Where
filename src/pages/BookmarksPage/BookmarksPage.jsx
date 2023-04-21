@@ -18,9 +18,15 @@ const BookmarksPage = ({ user }) => {
 
   return (
     <>
-      {bookmarks.map((location) => (
-        <LocationCard key={location._id} location={location} user={user} />
-      ))}
+      {bookmarks.length > 0 ? (
+        <>
+          {bookmarks.map((location) => (
+            <LocationCard key={location._id} location={location} user={user} />
+          ))}
+        </>
+      ) : (
+        <h2>No bookmarks</h2>
+      )}
     </>
   );
 };

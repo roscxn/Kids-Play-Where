@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import ReviewsForm from "../Reviews/ReviewsForm";
 
 const LocationDetails = ({ user }) => {
   const { id } = useParams();
   const [location, setLocation] = useState({});
   const [isBookmark, setIsBookmark] = useState(false);
-  const [isBookmarkAdded, setIsBookmarkAdded] = useState(false);
 
   useEffect(() => {
     const fetchLocation = async () => {
@@ -52,10 +52,8 @@ const LocationDetails = ({ user }) => {
       });
       if (response.ok && method == "POST") {
         setIsBookmark(!isBookmark);
-        setIsBookmarkAdded(true);
       } else if (response.ok) {
         setIsBookmark(!isBookmark);
-        setIsBookmarkAdded(false);
       } else if (response.status === 400) {
         const data = await response.json();
         alert(data.message);
@@ -67,8 +65,9 @@ const LocationDetails = ({ user }) => {
 
   return (
     <>
-      <h1>Location Details</h1>
-      {location.locationName}
+    
+      <h1 className="text-5xl font-bold">{location.locationName}</h1> <br />
+      <img src={location.image} alt="Location Image" className="w-100 h-96" />
       <br />
       {location.description}
       <br />
@@ -81,6 +80,8 @@ const LocationDetails = ({ user }) => {
           </button>
         </>
       )}
+
+      <><ReviewsForm /></>
     </>
   );
 };

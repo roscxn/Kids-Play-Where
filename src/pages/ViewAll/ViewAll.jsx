@@ -15,7 +15,7 @@ useEffect(() => {
   return (
     <>
     {locations.map((location) => 
-      <LocationCard key={location._id} location={location} />
+      <LocationCard key={location._id} location={location}/>
       )}
       
     </>
