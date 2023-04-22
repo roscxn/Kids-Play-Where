@@ -10,7 +10,6 @@ import Search from "../Search/search";
 import ViewAll from "../ViewAll/ViewAll";
 import LocationDetails from "../LocationDetails/LocationDetails";
 
-
 const App = () => {
   const [user, setUser] = useState(getUser());
 

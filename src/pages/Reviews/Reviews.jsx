@@ -1,21 +1,21 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-const Reviews = () => {
+const Reviews = ({ location }) => {
   const { id } = useParams();
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    const fetchReview = async () => {
+    const fetchReviews = async () => {
       try {
         const response = await fetch(`/api/location/${id}/reviews`);
-        const reviews = await response.json();
-        setReviews(reviews);
+        const data = await response.json();
+        setReviews(data);
       } catch (err) {
         console.error(err);
       }
     };
-    fetchReview();
+    fetchReviews();
   }, [id]);
 
   return (

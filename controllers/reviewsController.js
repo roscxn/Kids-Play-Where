@@ -27,18 +27,16 @@ const createReview = async (req, res) => {
 };
 
 const showReviews = async (req, res) => {
-  try {
     const location = await Location.findById(req.params.id);
     if (!location) {
       return res.status(404).send('Location not found');
-    }
-    const reviews = { ...location.reviews };
-    res.status(200).send(reviews);
+    }  
+    try {
+    response.json(location.reviews);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
-
 
 
 module.exports = {
