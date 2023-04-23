@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import ReviewsForm from "../Reviews/ReviewsForm";
+// import ReviewsForm from "../Reviews/ReviewsForm";
 import Reviews from "../Reviews/Reviews";
 
 const LocationDetails = ({ user }) => {
@@ -82,7 +82,7 @@ const LocationDetails = ({ user }) => {
       )}
       <>
         <Reviews location={location} user={user} />
-        <ReviewsForm user={user} />
+        {/* <ReviewsForm user={user} /> */}
       </>
     </>
   );

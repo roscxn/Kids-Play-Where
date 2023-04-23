@@ -47,7 +47,8 @@ const Map = () => {
           icon={blackIcon}
         >
           <Popup>
-            {location.locationName}<br/> {location.description}<br />
+            {location.locationName}<br/>{location.address}, Singapore({location.postalCode})<br/>
+            {location.description}<br />
           </Popup>
         </Marker>
       ))}

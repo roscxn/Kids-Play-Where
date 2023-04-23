@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LocationCard from "../../components/LocationCard/LocationCard";
 
+
 const ViewAll = () => {
   const [locations, setLocations] = useState([]);
 useEffect(() => {
@@ -14,6 +15,7 @@ useEffect(() => {
 
   return (
     <>
+    {/* <Search /> */}
     {locations.map((location) => 
       <LocationCard key={location._id} location={location}/>
       )}
