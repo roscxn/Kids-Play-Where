@@ -64,7 +64,7 @@ const Map = () => {
         // Set the search marker on the map.
         setSearchMarker({ lat, lon });
         // Reset the map view to the initial position and zoom level
-        mapRef.current.setView(position, 10);
+        mapRef.current.setView(position, 8);
       })
       .catch((error) => {
         console.log(error);
@@ -81,33 +81,57 @@ const Map = () => {
 
   // Searched postal code marker zoom in
   const handleSearchMarkerClick = () => {
-    mapRef.current.flyTo([searchMarker.lat, searchMarker.lon], 16);
+    mapRef.current.flyTo([searchMarker.lat, searchMarker.lon], 14);
   };
 
   return (
     <div>
-      <form onSubmit={handleSearchSubmit}>
-        <label>
-          Enter postal code:
-          <input
-            type="text"
-            value={searchPostalCode}
-            onChange={(e) => setSearchPostalCode(e.target.value)}
-            minLength={6}
-            maxLength={6}
-            pattern="\d{6}"
-          />
-        </label>
-        <button type="submit" disabled={!searchPostalCode}>
-          Search
-        </button>
-      </form>
-
-      {invalidPostalCode && (
-        <div style={{ color: "red" }}>
-          Invalid postal code. Please enter a Singapore postal code.
+      <div
+        className="hero min-h-20-screen"
+        style={{
+          backgroundImage: `url("https://msq.cxcms.ascentis.com.sg/mallsdeals/media/Stores/PPS%20Thumnail.jpg")`,
+        }}
+      >
+        <div className="hero-overlay bg-base-200 bg-opacity-50"></div>
+        <div className="hero-content text-center text-gray-700">
+          <div className="max-w-md">
+            <br />
+            <br />
+            <br />
+            <h1 className="mb-6 text-5xl font-bold">
+              Plan Your Next Adventure!
+            </h1>
+            <div className="mb-8 text-1xl">
+              <form onSubmit={handleSearchSubmit}>
+                <label>
+                  <input
+                    className="input input-bordered input-primary w-full max-w-xs"
+                    type="text"
+                    placeholder="Enter Postal Code"
+                    value={searchPostalCode}
+                    onChange={(e) => setSearchPostalCode(e.target.value)}
+                    minLength={6}
+                    maxLength={6}
+                    pattern="\d{6}"
+                  />
+                </label>
+                <button
+                  className="btn btn-primary"
+                  type="submit"
+                  disabled={!searchPostalCode}
+                >
+                  Search
+                </button>
+              </form>
+              {invalidPostalCode && (
+                <div style={{ color: "black" }}>
+                  Invalid postal code. Please try again.
+                </div>
+              )}
+            </div>
+          </div>
         </div>
-      )}
+      </div>
 
       <MapContainer
         center={position}
