@@ -1,24 +1,31 @@
 import { useState, useEffect, useRef } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { Link } from "react-router-dom";
 import L from "leaflet";
 
 const playIcon = new L.Icon({
-  iconUrl:
-    "https://i.ibb.co/0YzqCQ4/children-playing-png-icon-transparent-png-modified.png",
+  iconUrl: "https://i.ibb.co/Nx7sCZP/playground.png",
+  iconSize: [40, 40],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+});
+
+const swimIcon = new L.Icon({
+  iconUrl: "https://i.ibb.co/J2HtwCV/swimming.png",
   iconSize: [40, 40],
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
 });
 
 const homeIcon = new L.Icon({
-  iconUrl: "https://i.ibb.co/NCmDSGH/houseicon-modified.png",
+  iconUrl: "https://i.ibb.co/k3h6vj5/houseicon2.png",
   iconSize: [40, 40],
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
 });
 
 const Map = () => {
-  const position = [1.3521, 103.8198];
+  const position = [1.2907, 103.8517];
   const [locations, setLocations] = useState([]);
   const southWest = L.latLng(1.16, 103.59);
   const northEast = L.latLng(1.48, 104.05);
@@ -91,7 +98,9 @@ const Map = () => {
             pattern="\d{6}"
           />
         </label>
-        <button type="submit">Search</button>
+        <button type="submit" disabled={!searchPostalCode}>
+          Search
+        </button>
       </form>
 
       {invalidPostalCode && (
@@ -118,16 +127,27 @@ const Map = () => {
           <Marker
             key={location._id}
             position={[location.latitude, location.longitude]}
-            icon={playIcon}
+            icon={location.locationType === "Playground" ? playIcon : swimIcon}
             eventHandlers={{
               click: () => handleMarkerClick(location),
             }}
           >
             <Popup>
-              {location.locationName}
+              <img
+                src={location.image}
+                alt="Location Image"
+                style={{ width: "300px", height: "220px" }}
+              />
               <br />
-              {location.address}, Singapore({location.postalCode})<br />
+              <h1 style={{ fontSize: "22px", fontWeight: "bold" }}>
+                {location.locationName}
+              </h1>
               <br />
+              {location.address}, Singapore ({location.postalCode})<br />
+              <br />
+              <Link to={`/location/${location._id}`}>
+                <button>View More</button>
+              </Link>
             </Popup>
           </Marker>
         ))}
