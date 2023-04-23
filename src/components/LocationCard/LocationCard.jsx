@@ -1,42 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const LocationCard = ({ location, user, bookmarks }) => {
-  //   const [isBookmark, setIsBookmark] = useState();
-
-  //   useEffect(() => {
-  //     if (user && bookmarks) {
-  //       const isBookmark = bookmarks.find(
-  //         (bookmark) => bookmark._id.toString() === location._id.toString()
-  //       );
-  //       setIsBookmark(!!isBookmark);
-  //     }
-  //   }, [location._id, bookmarks, user]);
-
-  //   const handleBookmarkClick = async (event) => {
-  //     event.preventDefault();
-  //     try {
-  //       const method = isBookmark ? "DELETE" : "POST";
-  //       const response = await fetch(`/api/location/locationcard/addBookmark`, {
-  //         method: method,
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({ _id: user._id, locationid: location._id }),
-  //       });
-  //       if (response.ok && method == "POST") {
-  //         setIsBookmark(!isBookmark);
-  //       } else if (response.ok) {
-  //         setIsBookmark(!isBookmark);
-  //       } else if (response.status === 400) {
-  //         const data = await response.json();
-  //         // display the error message using a toast or alert
-  //         alert(data.message);
-  //       }
-  //     } catch (err) {
-  //       console.error(err);
-  //     }
-  //   };
+const LocationCard = ({ location }) => {
 
   return (
     <div className="flex flex-col w-full lg:flex-row">
@@ -64,19 +29,6 @@ const LocationCard = ({ location, user, bookmarks }) => {
             >
               <button>View More</button>
             </Link>
-
-            {/* {!user ? (
-                <></>
-              ) : (
-                <>
-                  <button
-                    className="btn btn-success"
-                    onClick={handleBookmarkClick}
-                  >
-                    { isBookmark ? "Added to Bookmarks" : "Bookmark"}
-                  </button>
-                </>
-              )} */}
           </div>
         </div>
       </div>

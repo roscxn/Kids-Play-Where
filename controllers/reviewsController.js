@@ -62,9 +62,34 @@ const deleteReview = async (req, res) => {
   }
 };
 
+const editReview = async (req, res) => {
+  const { id } = req.params;
+  const { content, rating } = req.body;
+  const userId = req.session.userId;
+
+  try {
+    const review = await Review.findById(id);
+    if (!review) {
+      return res.status(404).json({ message: "Review not found" });
+    }
+    if (review.userId !== userId) {
+      return res
+        .status(403)
+        .json({ message: "You are not authorized to edit this review" });
+    }
+    review.content = content;
+    review.rating = rating;
+    await review.save();
+    res.json(review);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 
 module.exports = {
     createReview,
-    deleteReview
+    deleteReview,
 
 }

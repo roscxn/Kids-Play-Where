@@ -20,7 +20,6 @@ app.use("/api/user", usersRouter);
 app.use("/api/location", locationRouter);
 app.use("/api/reviews", reviewsRouter);
 
-
 const port = process.env.PORT || 3000;
 
 app.get("/api", (req, res) => {

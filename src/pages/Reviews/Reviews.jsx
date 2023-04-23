@@ -89,7 +89,9 @@ const Reviews = ({ location, user }) => {
             <p>Rating: {review.rating}</p>
             <p>{review.content}</p>
             {user && review.userName === user.name ? (
-              <button onClick={() => handleDelete(review._id)}>Delete</button>
+              <>
+                <button onClick={() => handleDelete(review._id)}>Delete</button>
+              </>
             ) : (
               <></>
             )}
