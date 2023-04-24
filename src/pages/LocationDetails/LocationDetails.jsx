@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Reviews from "../Reviews/Reviews";
+import LocationReviews from "../LocationReviews/LocationReviews";
 
 const LocationDetails = ({ user }) => {
   const { id } = useParams();
@@ -80,7 +80,7 @@ const LocationDetails = ({ user }) => {
         </>
       )}
       <>
-        <Reviews location={location} user={user} />
+        <LocationReviews location={location} user={user} />
       </>
     </>
   );

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-const Reviews = ({ location, user }) => {
+const LocationReviews = ({ location, user }) => {
   const { id } = useParams();
   const [locationReviews, setLocationReviews] = useState([]);
   const [content, setContent] = useState("");
@@ -134,4 +134,4 @@ const Reviews = ({ location, user }) => {
   );
 };
 
-export default Reviews;
+export default LocationReviews;

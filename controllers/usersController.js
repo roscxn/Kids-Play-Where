@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Location = require('../models/Location')
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
 const bcrypt = require("bcrypt");
@@ -62,5 +63,5 @@ const showBookmarks = async (req, res) => {
 module.exports = {
   create,
   login,
-  showBookmarks
+  showBookmarks,
 };

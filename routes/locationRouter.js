@@ -10,5 +10,4 @@ router.delete('/:id/addBookmark', locationController.deleteBookmark)
 router.post("/locationcard/addBookmarkCard", locationController.addBookmarkCard);
 router.delete("/locationcard/addBookmarkCard", locationController.deleteBookmarkCard);
 
-
 module.exports = router;
