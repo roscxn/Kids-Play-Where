@@ -81,7 +81,7 @@ const Reviews = ({ location, user }) => {
 
   return (
     <>
-      <h2>View All Reviews</h2>
+      <h2>View All Reviews</h2> <hr />
       {locationReviews?.reviews?.length > 0 ? (
         locationReviews.reviews.map((review) => (
           <div key={review._id}>
@@ -90,11 +90,17 @@ const Reviews = ({ location, user }) => {
             <p>{review.content}</p>
             {user && review.userName === user.name ? (
               <>
-                <button onClick={() => handleDelete(review._id)}>Delete</button>
+                <button
+                  className="btn"
+                  onClick={() => handleDelete(review._id)}
+                >
+                  Delete
+                </button>
               </>
             ) : (
               <></>
             )}
+            <hr />
           </div>
         ))
       ) : (

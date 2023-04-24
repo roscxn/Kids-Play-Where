@@ -36,7 +36,7 @@ const addBookmark = async (req, res) => {
   } 
   try {
     const userId = req.body._id; 
-    const newBookmark = await User.findByIdAndUpdate(userId, {$push: {"bookmarks" : req.params.id}}).populate({ path: 'bookmarks', options: { strictPopulate: false } }).exec();
+    const newBookmark = await User.findByIdAndUpdate(userId, {$push: {"bookmarks" : req.params.id}}).exec();
     return res.status(200).json({ message: 'Location has been added to your Bookmarks.' }); 
   } catch (error) {
     console.log('error:', error);
@@ -49,7 +49,37 @@ const deleteBookmark = async (req, res) => {
   const user = await User.findById(req.body._id);
   const userId = req.body._id;
   if (user.bookmarks.find(b => b.toString() == req.params.id)) {
-    const deleteBookmark = await User.findByIdAndUpdate(userId, {$pull: {"bookmarks" : req.params.id}}).populate({ path: 'bookmarks', options: { strictPopulate: false } }).exec();
+    const deleteBookmark = await User.findByIdAndUpdate(userId, {$pull: {"bookmarks" : req.params.id}}).exec();
+      return res.status(201).json({ message: 'Remove bookmark from list' });
+  }
+  } catch (error) {
+    console.log('error:', error);
+    return res.status(400).json({ error: error.message });
+  }     
+};
+
+const addBookmarkCard = async (req, res) => {
+    const user = await User.findById(req.body._id);
+  if (user.bookmarks.find(b => b.toString() === req.body.locationId)) {
+    return res.status(400).json({ message: 'Location has already been added to your Bookmarks' });
+  } 
+  try {
+    const userId = req.body._id; 
+    const newBookmark = await User.findByIdAndUpdate(userId, {$push: {"bookmarks" : req.body.locationId}}).exec();
+    return res.status(200).json({ message: 'Location has been added to your Bookmarks.' }); 
+  } catch (error) {
+    console.log('error:', error);
+    return res.status(400).json({ error: error.message });
+  }
+};
+
+
+const deleteBookmarkCard = async (req, res) => {
+    try {
+  const user = await User.findById(req.body._id);
+  const userId = req.body._id;
+  if (user.bookmarks.find(b => b.toString() == req.body.locationId)) {
+    const deleteBookmark = await User.findByIdAndUpdate(userId, {$pull: {"bookmarks" : req.body.locationId}}).exec();
       return res.status(201).json({ message: 'Remove bookmark from list' });
   }
   } catch (error) {
@@ -58,10 +88,14 @@ const deleteBookmark = async (req, res) => {
   }     
   };
 
+
+
 module.exports = { 
     showMap,
     viewAll,
     show,
     addBookmark,
-    deleteBookmark
+    deleteBookmark,
+    addBookmarkCard,
+    deleteBookmarkCard
 };
