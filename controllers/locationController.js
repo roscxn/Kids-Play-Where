@@ -1,15 +1,14 @@
 const Location = require('../models/Location');
 const User = require("../models/User");
 
-const showMap = (req, res) => {
-    Location.find({})
-      .then(locations => {
-        res.json(locations);
-    })
-      .catch(err => {
-        console.error(err);
-        res.status(500).json({ error: 'Error retrieving locations from database.' });
-    });
+const showMap = async (req, res) => {
+  try {
+    const locations = await Location.find({});
+    res.json(locations);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error retrieving locations from database.' });
+  }
 }
 
 const viewAll = async (req, res) => {
@@ -65,5 +64,4 @@ module.exports = {
     show,
     addBookmark,
     deleteBookmark
-
 };

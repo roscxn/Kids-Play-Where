@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const LocationCard = ({ location }) => {
-
   return (
     <div className="flex flex-col w-full lg:flex-row">
       <div className="card card-compact w-48 h-80 bg-base-100 shadow-xl flex justify-center flex-wrap flex-row ">
@@ -17,6 +16,7 @@ const LocationCard = ({ location }) => {
           <h2 className="card-title text-ellipsis overflow-clip whitespace-nowrap w-100%">
             {location.locationName}
           </h2>
+          <br />
           <p className="text-xs">{location.locationType}</p>
           <div className="badge badge-outline">
             <p className="text-xs">{location.ageGroup.join(" / ")} years old</p>
