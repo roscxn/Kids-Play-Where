@@ -7,6 +7,8 @@ const reviewSchema = new Schema({
     rating: Number
 })
 
+module.exports = mongoose.model('Review', reviewSchema);
+
 const locationSchema = new Schema({
     locationName: {
         type: String,

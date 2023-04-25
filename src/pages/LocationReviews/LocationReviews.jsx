@@ -42,8 +42,6 @@ const LocationReviews = ({ location, user }) => {
       // Clear the form fields
       setContent("");
       setRating(0);
-
-      window.location.reload();
     } catch (error) {
       console.error(error);
       window.alert(error.message);

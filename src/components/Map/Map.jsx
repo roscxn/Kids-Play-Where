@@ -35,6 +35,7 @@ const Map = () => {
   const [searchMarker, setSearchMarker] = useState(null);
   const [invalidPostalCode, setInvalidPostalCode] = useState(false);
   const mapRef = useRef(null);
+  const [filterIcon, setFilterIcon] = useState(null);
 
   useEffect(() => {
     fetch("/api/location")
@@ -73,7 +74,7 @@ const Map = () => {
       });
   };
 
-  // Playground marker zoom in
+  // Playground/Pool marker zoom in
   const handleMarkerClick = (location) => {
     const { latitude, longitude } = location;
     mapRef.current.flyTo([latitude, longitude], 18);
@@ -82,6 +83,10 @@ const Map = () => {
   // Searched postal code marker zoom in
   const handleSearchMarkerClick = () => {
     mapRef.current.flyTo([searchMarker.lat, searchMarker.lon], 14);
+  };
+
+  const handleResetClick = () => {
+    setFilterIcon(null);
   };
 
   return (
@@ -133,6 +138,21 @@ const Map = () => {
         </div>
       </div>
 
+      <div>
+        <button className="btn-primary" onClick={() => setFilterIcon(playIcon)}>
+          Show Playgrounds
+        </button>
+        <button
+          className="btn-secondary"
+          onClick={() => setFilterIcon(swimIcon)}
+        >
+          Show Swimming Pools
+        </button>
+        <button className="btn-error" onClick={handleResetClick}>
+          Show All
+        </button>
+      </div>
+
       <MapContainer
         center={position}
         zoom={14}
@@ -147,34 +167,45 @@ const Map = () => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {locations.map((location) => (
-          <Marker
-            key={location._id}
-            position={[location.latitude, location.longitude]}
-            icon={location.locationType === "Playground" ? playIcon : swimIcon}
-            eventHandlers={{
-              click: () => handleMarkerClick(location),
-            }}
-          >
-            <Popup>
-              <img
-                src={location.image}
-                alt="Location Image"
-                style={{ width: "300px", height: "220px" }}
-              />
-              <br />
-              <h1 style={{ fontSize: "22px", fontWeight: "bold" }}>
-                {location.locationName}
-              </h1>
-              <br />
-              {location.address}, Singapore ({location.postalCode})<br />
-              <br />
-              <Link to={`/location/${location._id}`}>
-                <button>View More</button>
-              </Link>
-            </Popup>
-          </Marker>
-        ))}
+        {locations.map((location) => {
+          if (
+            !filterIcon ||
+            location.locationType ===
+              (filterIcon === playIcon ? "Playground" : "Pool")
+          ) {
+            return (
+              <Marker
+                key={location._id}
+                position={[location.latitude, location.longitude]}
+                icon={
+                  location.locationType === "Playground" ? playIcon : swimIcon
+                }
+                eventHandlers={{
+                  click: () => handleMarkerClick(location),
+                }}
+              >
+                <Popup>
+                  <img
+                    src={location.image}
+                    alt="Location Image"
+                    style={{ width: "300px", height: "220px" }}
+                  />
+                  <br />
+                  <h1 style={{ fontSize: "22px", fontWeight: "bold" }}>
+                    {location.locationName}
+                  </h1>
+                  <br />
+                  {location.address}, Singapore ({location.postalCode})<br />
+                  <br />
+                  <Link to={`/location/${location._id}`}>
+                    <button>View More</button>
+                  </Link>
+                </Popup>
+              </Marker>
+            );
+          }
+        })}
+
         {searchMarker && searchMarker.lat && searchMarker.lon && (
           <Marker
             position={[searchMarker.lat, searchMarker.lon]}
