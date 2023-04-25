@@ -2,10 +2,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const reviewSchema = new Schema({
-    userName: String,
-    content: String,
-    rating: Number
-})
+  userName: String,
+  content: String,
+  rating: {
+    type: Number,
+    default: 5
+  }
+});
 
 module.exports = mongoose.model('Review', reviewSchema);
 
@@ -36,7 +39,7 @@ const locationSchema = new Schema({
     },
     description: { 
         type: String,
-        maxLength: 200, 
+        maxLength: 500, 
         required: true,
         unique: true,
     },

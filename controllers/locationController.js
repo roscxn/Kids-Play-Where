@@ -89,7 +89,6 @@ const deleteBookmarkCard = async (req, res) => {
   };
 
 
-
 module.exports = { 
     showMap,
     viewAll,
@@ -97,5 +96,6 @@ module.exports = {
     addBookmark,
     deleteBookmark,
     addBookmarkCard,
-    deleteBookmarkCard
+    deleteBookmarkCard,
+
 };

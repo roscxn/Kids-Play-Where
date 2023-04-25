@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import LocationReviews from "../LocationReviews/LocationReviews";
+import LocationMap from "../../components/Map/LocationMap";
 
 const LocationDetails = ({ user }) => {
   const { id } = useParams();
@@ -65,21 +66,90 @@ const LocationDetails = ({ user }) => {
 
   return (
     <>
-      <h1 className="text-5xl font-bold">{location.locationName}</h1> <br />
-      <img src={location.image} alt="Location Image" className="w-100 h-96" />
+      <div className="w-10/12 text-justify ps-40 my-8 flex items-center">
+        <h1 className="text-4xl font-bold">{location.locationName}</h1>
+      </div>
+      <div className="flex items-center ps-40 my-4">
+        <img
+          className="w-6 h-6 mr-2"
+          src="https://i.ibb.co/m8VsQWF/houseicon.png"
+        />
+        <p className="text-gray-800">{location.address}</p>
+      </div>
       <br />
-      {location.description}
-      <br />
-      {!user ? (
-        <></>
-      ) : (
-        <>
-          <button className="btn btn-success" onClick={handleBookmarkClick}>
-            {isBookmark ? "Added to Bookmarks" : "Bookmark"}
-          </button>
-        </>
-      )}
+      <div className="flex flex-col w-full lg:flex-row justify-center px-20">
+        <div className="w-3/5 lg:pr-0">
+          <div className="grid h-32 card bg-base-100 rounded-box place-items-center rounded-lg">
+            <img
+              src={location.image}
+              className="h-full w-full object-cover rounded-lg"
+              style={{ width: "800px", height: "460px", opacity: 0.9 }}
+            />
+          </div>
+        </div>
+        <div className="w-1/7 lg:pl-0">
+          <div
+            className="grid h-32 card bg-base-200 rounded-box place-items-center rounded-lg"
+            style={{ height: "460px", width: "400px" }}
+          >
+            <div
+              className="grid h-4/5 bg-base-200 rounded-box place-items-center rounded-lg"
+              style={{ height: "100%", width: "100%", borderRadius: "0.5rem" }}
+            >
+              <LocationMap
+                id={id}
+                style={{
+                  height: "300px",
+                  width: "100%",
+                  borderRadius: "0.5rem",
+                }}
+                height={300}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="w-6/12 h-auto text-justify px-8 py-9 mx-40 my-8 rounded-lg border-4 border-orange-100 ">
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="text-2xl font-bold">Description</h1>
+          {!user ? (
+            <></>
+          ) : (
+            <button
+              className="btn btn-sm gap-2 btn-outline btn-primary"
+              onClick={handleBookmarkClick}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                />
+              </svg>
+              {isBookmark ? "Added to Bookmarks" : "Bookmark"}
+            </button>
+          )}
+        </div>
+        <br />
+
+        <div>
+          <p className="text-gray-800 text-sm tracking-wide">
+            {location.description}
+          </p>
+        </div>
+      </div>
+
       <>
+        <div className="w-10/12 text-justify ps-40 my-10 flex items-center">
+          <h1 className="text-2xl font-bold">View All Reviews</h1>
+        </div>
         <LocationReviews location={location} user={user} />
       </>
     </>

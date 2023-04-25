@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import React from "react";
 
 const LocationReviews = ({ location, user }) => {
   const { id } = useParams();
   const [locationReviews, setLocationReviews] = useState([]);
   const [content, setContent] = useState("");
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState("5");
 
   useEffect(() => {
     const fetchLocationReviews = async () => {
@@ -49,84 +50,151 @@ const LocationReviews = ({ location, user }) => {
   };
 
   const handleDelete = async (reviewId) => {
-    try {
-      const userId = user._id;
-      const locationId = location._id;
-      const response = await fetch(`/api/reviews/${reviewId}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ locationId, userId }),
-      });
-      const data = await response.json();
-      console.log(data.message);
-      if (!response.ok) {
-        throw new Error(data.message);
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this review?"
+    );
+    if (confirmed)
+      try {
+        const userId = user._id;
+        const locationId = location._id;
+        const response = await fetch(`/api/reviews/${reviewId}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ locationId, userId }),
+        });
+        const data = await response.json();
+        console.log(data.message);
+        if (!response.ok) {
+          throw new Error(data.message);
+        }
+        // Remove the deleted review from the locationReviews state
+        setLocationReviews((prevReviews) => ({
+          ...prevReviews,
+          reviews: prevReviews.reviews.filter(
+            (review) => review._id !== reviewId
+          ),
+        }));
+      } catch (error) {
+        console.error(error);
+        window.alert(error.message);
       }
-      // Remove the deleted review from the locationReviews state
-      setLocationReviews((prevReviews) => ({
-        ...prevReviews,
-        reviews: prevReviews.reviews.filter(
-          (review) => review._id !== reviewId
-        ),
-      }));
-    } catch (error) {
-      console.error(error);
-      window.alert(error.message);
-    }
   };
 
   return (
     <>
-      <h2>View All Reviews</h2> <hr />
-      {locationReviews?.reviews?.length > 0 ? (
-        locationReviews.reviews.map((review) => (
-          <div key={review._id}>
-            <h3>By {review.userName}</h3>
-            <p>Rating: {review.rating}</p>
-            <p>{review.content}</p>
-            {user && review.userName === user.name ? (
-              <>
-                <button
-                  className="btn"
-                  onClick={() => handleDelete(review._id)}
-                >
-                  Delete
-                </button>
-              </>
-            ) : (
-              <></>
-            )}
-            <hr />
-          </div>
-        ))
-      ) : (
-        <h2>No reviews</h2>
-      )}
+      <div className="flex flex-wrap px-40 gap-8 mt-10">
+        {locationReviews?.reviews?.length > 0 ? (
+          locationReviews.reviews.map((review) => (
+            <div
+              key={review._id}
+              className="card w-60 h-40 bg-base-100 shadow-xl mb-4"
+            >
+              <div className="card-body flex flex-col">
+                <div className="flex justify-between items-center mb-2">
+                  <h3 className="card-title">By {review.userName}</h3>
+                  {user && review.userName === user.name ? (
+                    <button
+                      className="btn btn-circle btn-xs btn-outline"
+                      onClick={() => handleDelete(review._id)}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </button>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+                <p>Rating: {review.rating}</p>
+                <p>{review.content}</p>
+              </div>
+            </div>
+          ))
+        ) : (
+          <h2>No reviews yet.</h2>
+        )}
+      </div>
+
       {!user ? (
         <></>
       ) : (
-        <form onSubmit={handleSubmit}>
-          <label>
-            Content:
-            <textarea
-              value={content}
-              onChange={(event) => setContent(event.target.value)}
-            />
-          </label>
-          <label>
-            Rating:
-            <input
-              type="number"
-              min="1"
-              max="5"
-              value={rating}
-              onChange={(event) => setRating(event.target.value)}
-            />
-          </label>
-          <button type="submit">Submit</button>
-        </form>
+        <div className="collapse px-36 gap-5 mt-10 mb-16">
+          <input type="checkbox" />
+          <div className="collapse-title text-xl font-medium">Add Review +</div>
+          <div className="collapse-content">
+            <form onSubmit={handleSubmit}>
+              <div className="rating rating-md">
+                <input
+                  type="radio"
+                  name="rating"
+                  className="mask mask-star-2 bg-orange-400"
+                  value="1"
+                  checked={rating === "1"}
+                  onChange={(event) => setRating(event.target.value)}
+                />
+                <input
+                  type="radio"
+                  name="rating"
+                  className="mask mask-star-2 bg-orange-400"
+                  value="2"
+                  checked={rating === "2"}
+                  onChange={(event) => setRating(event.target.value)}
+                />
+                <input
+                  type="radio"
+                  name="rating"
+                  className="mask mask-star-2 bg-orange-400"
+                  value="3"
+                  checked={rating === "3"}
+                  onChange={(event) => setRating(event.target.value)}
+                />
+                <input
+                  type="radio"
+                  name="rating"
+                  className="mask mask-star-2 bg-orange-400"
+                  value="4"
+                  checked={rating === "4"}
+                  onChange={(event) => setRating(event.target.value)}
+                />
+                <input
+                  type="radio"
+                  name="rating"
+                  className="mask mask-star-2 bg-orange-400"
+                  value="5"
+                  checked={rating === "5"}
+                  onChange={(event) => setRating(event.target.value)}
+                />
+              </div>
+              <br />
+              <label>
+                Content:
+                <br />
+                <textarea
+                  className="textarea textarea-primary textarea-lg w-full max-w-xs"
+                  value={content}
+                  onChange={(event) => setContent(event.target.value)}
+                />
+              </label>
+              <br />
+              <button className="btn btn-sm btn-primary" type="submit">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
       )}
     </>
   );

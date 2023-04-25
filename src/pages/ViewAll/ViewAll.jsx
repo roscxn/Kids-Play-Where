@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import LocationCard from "../../components/LocationCard/LocationCard";
 import CategoryFilter from "../CategoryFilter/CategoryFilter";
 
-const ViewAll = ({user}) => {
+const ViewAll = ({ user }) => {
   const [locations, setLocations] = useState([]);
   const [filteredLocations, setFilteredLocations] = useState([]);
   const [filters, setFilters] = useState({
@@ -45,9 +45,16 @@ const ViewAll = ({user}) => {
   return (
     <>
       <CategoryFilter handleFilter={handleFilter} />
-      {filteredLocations.map((location) => (
-        <LocationCard key={location._id} location={location} user={user}/>
-      ))}
+
+      {filteredLocations?.length > 0 ? (
+        <>
+          {filteredLocations.map((location) => (
+            <LocationCard key={location._id} location={location} user={user} />
+          ))}
+        </>
+      ) : (
+        <h2>No Location Found</h2>
+      )}
     </>
   );
 };
