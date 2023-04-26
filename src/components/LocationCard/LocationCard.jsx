@@ -52,36 +52,35 @@ const LocationCard = ({ location, user }) => {
 
   return (
     <Link key={location._id} to={`/location/${location._id}`}>
-      <div className="flex flex-col w-full lg:flex-row ">
-        <div className="card card-compact w-52 h-80 bg-base-100 shadow-3xl flex justify-center flex-wrap flex-row hover:-translate-y-2 transition duration-200">
+      <div className="flex flex-col w-auto h-80 lg:flex-row">
+        <div className="card card-compact bg-base-100 shadow-3xl hover:-translate-y-2 transition duration-200">
           <figure>
             <img
               src={location.image}
               alt="Location Image"
-              className="w-52 h-36 opacity-90 object-cover"
+              className="w-full h-44 opacity-90 object-cover"
             />
           </figure>
-          <div className="card-body flex-wrap flex-row flex-col">
-            <h2 className="card-title text-ellipsis overflow-clip whitespace-nowrap w-100% text-md">
+          <div className="card-body flex-wrap flex-row flex-col h-48 overflow-hidden">
+            <h2 className="card-title text-md line-clamp-1">
               {location.locationName}
             </h2>
-            <div className="text-xs flex gap-2 mb-3">
+            <div className="text-sm flex gap-2 mb-3">
               {location.locationType}
               {location.locationType === "Playground" ? (
                 <img
-                  className="w-4 h-4"
+                  className="w-5 h-5"
                   src="https://i.ibb.co/Nx7sCZP/playground.png"
                   alt="Playground"
                 />
               ) : (
                 <img
-                  className="w-4 h-4"
+                  className="w-5 h-5"
                   src="https://i.ibb.co/J2HtwCV/swimming.png"
                   alt="Pool"
                 />
               )}
             </div>
-
             <div className="badge badge-outline">
               <p className="text-xs">
                 {location?.ageGroup
@@ -105,7 +104,6 @@ const LocationCard = ({ location, user }) => {
                   .join(", ")}{" "}
               </p>
             </div>
-
             <div className="card-actions justify-end">
               <br />
               {!user ? (

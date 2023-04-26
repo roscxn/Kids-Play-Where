@@ -160,7 +160,7 @@ const LocationReviews = ({ location, user }) => {
             </div>
           ))
         ) : (
-          <h2>No reviews yet.</h2>
+          <><div className="mb-6">No reviews yet.</div></>
         )}
       </div>
 
@@ -235,7 +235,7 @@ const LocationReviews = ({ location, user }) => {
               </button>
             </form>
           </div>
-          {error && <div className="text-red-500 text-sm mt-2">{error}</div>}
+          {error && <div className="text-red-500 text-sm mt-2 mb-3">{error}</div>}
         </div>
       )}
     </>

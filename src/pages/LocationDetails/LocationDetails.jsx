@@ -165,8 +165,20 @@ const LocationDetails = ({ user }) => {
         <br />
         <br />
         <br />
+        Website:{" "}
+        <a
+          href={location.website}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:underline text-cyan-600"
+        >
+          Click here
+        </a>
+        <br />
+        <br />
         Recommended for ages:{" "}
-        {location?.ageGroup?.sort()
+        {location?.ageGroup
+          ?.sort()
           .reduce((acc, curr) => {
             const lowerBound = parseInt(curr.split("-")[0]);
             const upperBound = parseInt(curr.split("-")[1]);

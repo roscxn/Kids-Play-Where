@@ -62,18 +62,18 @@ const ViewAll = ({ user }) => {
       </div>
 
       <CategoryFilter handleFilter={handleFilter} />
-      <div className="flex flex-wrap justify-center gap-20 mt-14 mb-20">
+      <div className="flex flex-wrap gap-20 mt-14 mb-20 ml-32">
         {filteredLocations?.length > 0 ? (
           filteredLocations.map((location) => (
             <div
               key={location._id}
-              className="card card-compact w-52 bg-base-100 shadow-xl"
+              className="card card-compact w-48 bg-base-100 shadow-xl"
             >
               <LocationCard location={location} user={user} />
             </div>
           ))
         ) : (
-          <h2>No Location Found</h2>
+          <h2 className="mb-10">No Location Found</h2>
         )}
       </div>
     </>
