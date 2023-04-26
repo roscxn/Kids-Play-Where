@@ -6,8 +6,9 @@ const SALT_ROUNDS = 10;
 const userSchema = new Schema({
     name: { 
         type: String,
-        maxLength: 100, 
-        required: true
+        required: true,
+        minlength: 2,
+        maxlength: 20,
     },
     email: {
         type: String,
@@ -22,7 +23,7 @@ const userSchema = new Schema({
         type: String,
         trim: true,
         minLength: 8,
-        maxLength: 80,
+        maxLength: 12,
         required: true
     },
     bookmarks: [{

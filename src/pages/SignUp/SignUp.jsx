@@ -67,6 +67,8 @@ const SignUp = ({ setUser }) => {
                       className="input input-bordered input-primary"
                       value={state.name}
                       onChange={handleChange}
+                      minLength={2}
+                      maxLength={20}
                       required
                     />
                   </div>
@@ -81,6 +83,7 @@ const SignUp = ({ setUser }) => {
                       className="input input-bordered input-primary"
                       value={state.email}
                       onChange={handleChange}
+                      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                       required
                     />
                   </div>
@@ -96,6 +99,7 @@ const SignUp = ({ setUser }) => {
                       value={state.password}
                       onChange={handleChange}
                       minLength={8}
+                      maxLength={12}
                       required
                     />
 
@@ -110,6 +114,7 @@ const SignUp = ({ setUser }) => {
                       value={state.confirm}
                       onChange={handleChange}
                       minLength={8}
+                      maxLength={12}
                       required
                     />
 

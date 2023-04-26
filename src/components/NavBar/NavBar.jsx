@@ -42,7 +42,7 @@ export default function NavBar({ user, setUser }) {
           </div>
         </div>
         <div className="navbar-center btn btn-ghost normal-case text-2xl">
-          <Link to="/">KIDS PLAY WHERE</Link>
+          <Link to="/">KIDS PLAY WHERE </Link>
         </div>
 
         <div className="navbar-end mr-4">

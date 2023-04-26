@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 
 const Login = ({ setUser }) => {
   const navigate = useNavigate();
+  const [error, setError] = useState("");
+
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
-
-  const [error, setError] = useState("");
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
@@ -18,8 +18,8 @@ const Login = ({ setUser }) => {
       const user = await login(credentials);
       setUser(getUser());
       navigate("/");
-    } catch {
-      setError("Login failed. Try again.");
+    } catch (error) {
+      setError("Invalid Email Address or Password");
     }
   };
 
@@ -75,6 +75,7 @@ const Login = ({ setUser }) => {
                       value={credentials.password}
                       onChange={handleChange}
                       minLength={8}
+                      maxLength={12}
                       required
                     />
                     <label className="label">
@@ -89,8 +90,8 @@ const Login = ({ setUser }) => {
                   <div className="form-control mt-6">
                     <button className="btn btn-info" type="submit">
                       Login
-                    </button>
-                    <p className="error-message">&nbsp;{credentials.error}</p>
+                    </button><br/>
+                    {error && <p className="error-message">&nbsp;{error}</p>}
                   </div>
                 </form>
               </div>

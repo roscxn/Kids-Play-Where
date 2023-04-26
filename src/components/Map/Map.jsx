@@ -167,7 +167,7 @@ const Map = () => {
           </button>
         </form>
         {invalidPostalCode && (
-          <div style={{ color: "red" }}>Invalid postal code</div>
+          <div className="text-xs text-red-500">Invalid postal code</div>
         )}
       </div>
 
