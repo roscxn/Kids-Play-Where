@@ -39,94 +39,105 @@ const SignUp = ({ setUser }) => {
   };
 
   return (
-    <div className="hero min-h-screen bg-base-200">
-      <div className="hero-content flex-col">
-        <div className="text-center lg:text-center">
-          <h1 className="text-4xl font-bold">Create Account</h1>
-        </div>
-        <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-          <div className="card-body">
-            <form autoComplete="off" onSubmit={handleSubmit}>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Name</span>
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="name"
-                  className="input input-bordered"
-                  value={state.name}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Email</span>
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="email"
-                  className="input input-bordered"
-                  value={state.email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Password</span>
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="password"
-                  className="input input-bordered"
-                  value={state.password}
-                  onChange={handleChange}
-                  minLength={8}
-                  required
-                />
+    <>
+      <div className="grid grid-cols-2 h-screen bg-base-11">
+        <div
+          className="hero bg-cover bg-center opacity-70 "
+          style={{
+            backgroundImage: `url("https://msq.cxcms.ascentis.com.sg/mallsdeals/media/Stores/PPS%20Thumnail.jpg")`,
+          }}
+        ></div>
+        <div className="hero bg-base-100 border-4 border-amber-100">
+          <div className="hero-content flex-col">
+            <div className="card flex-shrink-0 w-full max-w-sm  bg-base-100">
+              <div className="card-body w-96">
+                <h1 className="text-4xl font-bold text-center">
+                  Create Account
+                </h1>
+                <br />
+                <form autoComplete="off" onSubmit={handleSubmit}>
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text">Name</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="name"
+                      className="input input-bordered input-primary"
+                      value={state.name}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text">Email</span>
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="email"
+                      className="input input-bordered input-primary"
+                      value={state.email}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text">Password</span>
+                    </label>
+                    <input
+                      type="password"
+                      name="password"
+                      placeholder="password"
+                      className="input input-bordered input-primary"
+                      value={state.password}
+                      onChange={handleChange}
+                      minLength={8}
+                      required
+                    />
 
-                <label className="label">
-                  <span className="label-text">Confirm Password</span>
-                </label>
-                <input
-                  type="password"
-                  name="confirm"
-                  placeholder="Confirm Password"
-                  className="input input-bordered"
-                  value={state.confirm}
-                  onChange={handleChange}
-                  minLength={8}
-                  required
-                />
+                    <label className="label">
+                      <span className="label-text">Confirm Password</span>
+                    </label>
+                    <input
+                      type="password"
+                      name="confirm"
+                      placeholder="Confirm Password"
+                      className="input input-bordered input-primary"
+                      value={state.confirm}
+                      onChange={handleChange}
+                      minLength={8}
+                      required
+                    />
 
-                <label className="label">
-                  <Link
-                    to="/user/login"
-                    className="label-text-alt link link-hover"
-                  >
-                    Have an account? Login here.
-                  </Link>
-                </label>
+                    <label className="label">
+                      <Link
+                        to="/user/login"
+                        className="label-text-alt link link-hover"
+                      >
+                        Have an account? Login here.
+                      </Link>
+                    </label>
+                  </div>
+                  <div className="form-control mt-6">
+                    <button
+                      className="btn btn-primary"
+                      type="submit"
+                      disabled={disable}
+                    >
+                      Sign Up
+                    </button>
+                  </div>
+                </form>
               </div>
-              <div className="form-control mt-6">
-                <button
-                  className="btn btn-info"
-                  type="submit"
-                  disabled={disable}
-                >
-                  Sign Up
-                </button>
-              </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

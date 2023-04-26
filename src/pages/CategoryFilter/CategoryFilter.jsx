@@ -36,12 +36,13 @@ const CategoryFilter = ({ handleFilter }) => {
 
   return (
     <>
+    
       <div className="flex flex-wrap ml-3 mt-8 mb-5 gap-2">
         <label className="text-2xl">
           <strong>Filter by</strong>
         </label>
 
-        <div className="mr-4 ml-16 flex items-center">
+        <div className="mr-4 ml-12 flex items-center">
           <label className="mr-4">
             <strong>Location:</strong>
           </label>
@@ -63,7 +64,7 @@ const CategoryFilter = ({ handleFilter }) => {
           />
         </div>
 
-        <div className="mr-4 flex items-center">
+        <div className="mr-2 flex items-center">
           <label>
             <input
               type="radio"
@@ -82,7 +83,7 @@ const CategoryFilter = ({ handleFilter }) => {
           />
         </div>
         <div>
-          <label className="ml-16 mr-4">
+          <label className="ml-12 mr-4">
             <strong>Age:</strong>
           </label>
           <label>
@@ -96,7 +97,7 @@ const CategoryFilter = ({ handleFilter }) => {
             <span className="ml-1">0-2 years old</span>
           </label>
         </div>
-        <div className="ml-4 mr-4">
+        <div className="ml-2 mr-2">
           <label>
             <input
               type="checkbox"
@@ -120,7 +121,7 @@ const CategoryFilter = ({ handleFilter }) => {
             <span className="ml-1">4-6 years old</span>
           </label>
         </div>
-        <div className="ml-4">
+        <div className="ml-2">
           <label>
             <input
               type="checkbox"
