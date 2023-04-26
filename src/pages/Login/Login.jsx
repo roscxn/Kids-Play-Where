@@ -32,6 +32,7 @@ const Login = ({ setUser }) => {
   };
 
   return (
+  <>
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col">
         <div className="text-center lg:text-center">
@@ -88,6 +89,7 @@ const Login = ({ setUser }) => {
         </div>
       </div>
     </div>
+  </>
   );
 };
 

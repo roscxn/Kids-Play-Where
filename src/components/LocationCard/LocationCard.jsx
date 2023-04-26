@@ -21,7 +21,7 @@ const LocationCard = ({ location, user }) => {
       }
     };
     checkBookmark();
-  }, []);
+  }, [user]);
 
   const handleLocationBookmarkClick = async (event) => {
     event.preventDefault();
@@ -57,36 +57,67 @@ const LocationCard = ({ location, user }) => {
           <img
             src={location.image}
             alt="Location Image"
-            className="w-52 h-32"
+            className="w-52 h-32 opacity-90 object-cover"
           />
         </figure>
         <div className="card-body flex-wrap flex-row">
-          <h2 className="card-title text-ellipsis overflow-clip whitespace-nowrap w-100%">
+          <h2 className="card-title text-ellipsis overflow-clip whitespace-nowrap w-100% text-md">
             {location.locationName}
           </h2>
-          <br />
-          <p className="text-xs">{location.locationType}</p>
+          {location.locationType}
+          {/* <p className="text-xs">{location.locationType}</p> */}
+          {location.locationType === "Playground" ? (
+            <img
+              className="w-5 h-5"
+              src="https://i.ibb.co/Nx7sCZP/playground.png"
+              alt="Playground"
+            />
+          ) : (
+            <img
+              className="w-5 h-5"
+              src="https://i.ibb.co/J2HtwCV/swimming.png"
+              alt="Pool"
+            />
+          )}
+
           <div className="badge badge-outline">
             <p className="text-xs">{location.ageGroup.join(" / ")} years old</p>
           </div>
+
           <div className="card-actions justify-end">
-            <Link
-              key={location._id}
-              to={`/location/${location._id}`}
-              style={{ textDecoration: "none", color: "black" }}
-            >
-              <button>View More</button>
-            </Link>
+            <div>
+              <Link
+                key={location._id}
+                to={`/location/${location._id}`}
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <button>View More</button>
+              </Link>
+            </div>
             <br />
             {!user ? (
               <></>
             ) : (
               <>
                 <button
-                  className="btn btn-success"
+                  className="btn gap-1 btn-outline btn-primary btn-xs"
                   onClick={handleLocationBookmarkClick}
                 >
-                  {isBookmark ? "Added to Bookmarks" : "Bookmark"}
+                  {isBookmark ? "Added" : "Bookmark"}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-3 w-3"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                    />
+                  </svg>
                 </button>
               </>
             )}

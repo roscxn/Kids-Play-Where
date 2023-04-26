@@ -25,7 +25,7 @@ const homeIcon = new L.Icon({
 });
 
 const Map = () => {
-  const position = [1.2907, 103.8517];
+  const position = [1.3521, 103.8499];
   const [locations, setLocations] = useState([]);
   const southWest = L.latLng(1.16, 103.59);
   const northEast = L.latLng(1.48, 104.05);
@@ -36,6 +36,7 @@ const Map = () => {
   const [invalidPostalCode, setInvalidPostalCode] = useState(false);
   const mapRef = useRef(null);
   const [filterIcon, setFilterIcon] = useState(null);
+  const [activeTab, setActiveTab] = useState("all");
 
   useEffect(() => {
     fetch("/api/location")
@@ -77,7 +78,7 @@ const Map = () => {
   // Playground/Pool marker zoom in
   const handleMarkerClick = (location) => {
     const { latitude, longitude } = location;
-    mapRef.current.flyTo([latitude, longitude], 18);
+    mapRef.current.flyTo([latitude, longitude], 16);
   };
 
   // Searched postal code marker zoom in
@@ -85,79 +86,96 @@ const Map = () => {
     mapRef.current.flyTo([searchMarker.lat, searchMarker.lon], 14);
   };
 
+  // Search All Icons
   const handleResetClick = () => {
     setFilterIcon(null);
   };
 
+  // Change tabs
+  const handleTabClick = (tabName) => {
+    setActiveTab(tabName);
+  };
+
   return (
     <div>
-      <div
-        className="hero min-h-20-screen"
-        style={{
-          backgroundImage: `url("https://msq.cxcms.ascentis.com.sg/mallsdeals/media/Stores/PPS%20Thumnail.jpg")`,
-        }}
-      >
-        <div className="hero-overlay bg-base-200 bg-opacity-50"></div>
-        <div className="hero-content text-center text-gray-700">
-          <div className="max-w-md">
-            <br />
-            <br />
-            <br />
-            <h1 className="mb-6 text-5xl font-bold">
-              Plan Your Next Adventure!
-            </h1>
-            <div className="mb-8 text-1xl">
-              <form onSubmit={handleSearchSubmit}>
-                <label>
-                  <input
-                    className="input input-bordered input-primary w-full max-w-xs"
-                    type="text"
-                    placeholder="Enter Postal Code"
-                    value={searchPostalCode}
-                    onChange={(e) => setSearchPostalCode(e.target.value)}
-                    minLength={6}
-                    maxLength={6}
-                    pattern="\d{6}"
-                  />
-                </label>
-                <button
-                  className="btn btn-primary"
-                  type="submit"
-                  disabled={!searchPostalCode}
-                >
-                  Search
-                </button>
-              </form>
-              {invalidPostalCode && (
-                <div style={{ color: "black" }}>
-                  Invalid postal code. Please try again.
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <button className="btn-primary" onClick={() => setFilterIcon(playIcon)}>
-          Show Playgrounds
-        </button>
-        <button
-          className="btn-secondary"
-          onClick={() => setFilterIcon(swimIcon)}
+      <div className="ml-4 tabs mb-3 mt-3">
+        <a
+          className={`tab ${
+            activeTab === "all" ? "bg-primary text-white rounded-lg" : ""
+          }`}
+          onClick={() => {
+            handleTabClick("all");
+            handleResetClick();
+          }}
         >
-          Show Swimming Pools
-        </button>
-        <button className="btn-error" onClick={handleResetClick}>
           Show All
-        </button>
+        </a>
+        <div
+          className={`tab gap-2 ${
+            activeTab === "playgrounds"
+              ? "bg-primary text-white rounded-lg"
+              : ""
+          }`}
+          onClick={() => {
+            handleTabClick("playgrounds");
+            setFilterIcon(playIcon);
+          }}
+        >
+          Show Playgrounds
+          <img
+            className="w-6 h-6"
+            src="https://i.ibb.co/Nx7sCZP/playground.png"
+            alt="playground"
+          />
+        </div>
+        <a
+          className={`tab gap-2 ${
+            activeTab === "pools" ? "bg-primary text-white rounded-lg" : ""
+          }`}
+          onClick={() => {
+            handleTabClick("pools");
+            setFilterIcon(swimIcon);
+          }}
+        >
+          Show Pools
+          <img
+            className="w-6 h-6"
+            src="https://i.ibb.co/J2HtwCV/swimming.png"
+            alt="swimming"
+          />
+        </a>
+
+        <form className="ml-20 flex" onSubmit={handleSearchSubmit}>
+          <label>
+            <input
+              className="input input-sm input-bordered input-primary w-full max-w-xs"
+              type="text"
+              placeholder="Enter Postal Code"
+              value={searchPostalCode}
+              onChange={(e) => setSearchPostalCode(e.target.value)}
+              minLength={6}
+              maxLength={6}
+              pattern="\d{6}"
+            />
+          </label>
+          <button
+            className="btn ml-2 mr-6 btn-primary btn-sm text-black"
+            type="submit"
+            disabled={!searchPostalCode}
+          >
+            Search
+          </button>
+        </form>
+        {invalidPostalCode && (
+          <div style={{ color: "red" }}>Invalid postal code</div>
+        )}
       </div>
 
       <MapContainer
         center={position}
-        zoom={14}
+        zoom={12}
         scrollWheelZoom={true}
-        style={{ width: "100%", height: "600px" }}
+        style={{ width: "100%", height: "550px" }}
         bounds={bounds}
         minZoom={12}
         maxZoom={18}

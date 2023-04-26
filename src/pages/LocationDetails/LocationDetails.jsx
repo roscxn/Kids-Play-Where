@@ -109,8 +109,8 @@ const LocationDetails = ({ user }) => {
           </div>
         </div>
       </div>
-      <div className="w-6/12 h-auto text-justify px-8 py-9 mx-40 my-8 rounded-lg border-4 border-orange-100 ">
-        <div className="flex justify-between items-center mb-4">
+      <div className="w-9/12 h-6 text-justify py-9 mx-40 my-8 rounded-lg">
+        <div className="flex justify-between items-center">
           <h1 className="text-2xl font-bold">Description</h1>
           {!user ? (
             <></>
@@ -137,18 +137,19 @@ const LocationDetails = ({ user }) => {
             </button>
           )}
         </div>
-        <br />
 
-        <div>
-          <p className="text-gray-800 text-sm tracking-wide">
-            {location.description}
-          </p>
-        </div>
+        <div></div>
+      </div>
+      <div
+        className="w-7/12 h-auto text-justify ps-40 mb-20 text-gray-800 text-sm tracking-wide"
+        style={{ paddingTop: "20px" }}
+      >
+        {location.description}
       </div>
 
       <>
-        <div className="w-10/12 text-justify ps-40 my-10 flex items-center">
-          <h1 className="text-2xl font-bold">View All Reviews</h1>
+        <div className="w-10/12 text-justify ps-40 my-5 flex">
+          <h1 className="text-2xl font-bold">View All Reviews </h1>
         </div>
         <LocationReviews location={location} user={user} />
       </>

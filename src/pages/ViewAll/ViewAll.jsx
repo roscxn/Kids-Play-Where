@@ -44,17 +44,38 @@ const ViewAll = ({ user }) => {
 
   return (
     <>
-      <CategoryFilter handleFilter={handleFilter} />
+      <div
+        className="hero h-80"
+        style={{
+          backgroundImage: `url("https://msq.cxcms.ascentis.com.sg/mallsdeals/media/Stores/PPS%20Thumnail.jpg")`,
+        }}
+      >
+        <div className="hero-overlay bg-base-200 bg-opacity-50"></div>
+        <div className="hero-content text-white">
+          <div className="mb-2">
+            <br />
+            <h1 className="mb-4 text-5xl text-center font-bold">
+              Plan Your Next Adventure!
+            </h1>
+          </div>
+        </div>
+      </div>
 
-      {filteredLocations?.length > 0 ? (
-        <>
-          {filteredLocations.map((location) => (
-            <LocationCard key={location._id} location={location} user={user} />
-          ))}
-        </>
-      ) : (
-        <h2>No Location Found</h2>
-      )}
+      <CategoryFilter handleFilter={handleFilter} />
+      <div className="flex flex-wrap justify-center gap-20 mt-14 mb-20">
+        {filteredLocations?.length > 0 ? (
+          filteredLocations.map((location) => (
+            <div
+              key={location._id}
+              className="card card-compact w-48 bg-base-100 shadow-xl"
+            >
+              <LocationCard location={location} user={user} />
+            </div>
+          ))
+        ) : (
+          <h2>No Location Found</h2>
+        )}
+      </div>
     </>
   );
 };

@@ -84,16 +84,26 @@ const LocationReviews = ({ location, user }) => {
 
   return (
     <>
-      <div className="flex flex-wrap px-40 gap-8 mt-10">
+      <div className="flex flex-wrap px-40 gap-8 mt-10 ">
         {locationReviews?.reviews?.length > 0 ? (
           locationReviews.reviews.map((review) => (
             <div
               key={review._id}
-              className="card w-60 h-40 bg-base-100 shadow-xl mb-4"
+              className="card w-60 h-40 bg-base-100 shadow-xl mb-4 border-2"
             >
               <div className="card-body flex flex-col">
                 <div className="flex justify-between items-center mb-2">
-                  <h3 className="card-title">By {review.userName}</h3>
+                  <h3 className="card-title text-sm flex items-center">
+                    {Array.from({ length: review.rating }, (_, index) => (
+                      <img
+                        key={index}
+                        className="w-5 h-5"
+                        src="https://i.ibb.co/F54cRjT/star.jpg"
+                        alt="star"
+                      />
+                    ))}
+                  </h3>
+
                   {user && review.userName === user.name ? (
                     <button
                       className="btn btn-circle btn-xs btn-outline"
@@ -118,8 +128,9 @@ const LocationReviews = ({ location, user }) => {
                     <></>
                   )}
                 </div>
-                <p>Rating: {review.rating}</p>
-                <p>{review.content}</p>
+                <p className="text-sm">{review.content}</p>
+                <br />
+                <p className="text-xs">Review by {review.userName}</p>
               </div>
             </div>
           ))
@@ -136,6 +147,8 @@ const LocationReviews = ({ location, user }) => {
           <div className="collapse-title text-xl font-medium">Add Review +</div>
           <div className="collapse-content">
             <form onSubmit={handleSubmit}>
+              <label>Leave a rating:</label>
+              <br />
               <div className="rating rating-md">
                 <input
                   type="radio"
@@ -178,6 +191,7 @@ const LocationReviews = ({ location, user }) => {
                   onChange={(event) => setRating(event.target.value)}
                 />
               </div>
+              <br />
               <br />
               <label>
                 Content:
