@@ -137,6 +137,7 @@ const SignUp = ({ setUser }) => {
                     </button>
                   </div>
                 </form>
+                {error && <p className="error-message">&nbsp;{error}</p>}
               </div>
             </div>
           </div>
