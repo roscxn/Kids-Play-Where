@@ -18,7 +18,7 @@ const swimIcon = new L.Icon({
 });
 
 const homeIcon = new L.Icon({
-  iconUrl: "https://i.ibb.co/k3h6vj5/houseicon2.png",
+  iconUrl: "https://i.ibb.co/TR2h2LV/houseicon2.png",
   iconSize: [40, 40],
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
