@@ -41,8 +41,15 @@ export default function NavBar({ user, setUser }) {
             </ul>
           </div>
         </div>
-        <div className="navbar-center btn btn-ghost normal-case text-2xl">
-          <Link to="/">KIDS PLAY WHERE </Link>
+        <div className="navbar-center btn btn-ghost normal-case text-2xl gap-3">
+          <img
+            className="w-12 h-11"
+            src="https://i.ibb.co/t24gm3D/kidslogo-removebg.png"
+            alt="kidslogo"
+          />
+          <Link to="/" className="hover:text-current">
+            KIDS PLAY WHERE{" "}
+          </Link>
         </div>
 
         <div className="navbar-end mr-4">

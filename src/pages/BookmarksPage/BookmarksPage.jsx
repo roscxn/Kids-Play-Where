@@ -1,20 +1,27 @@
 import { useState, useEffect } from "react";
 import LocationCard from "../../components/LocationCard/LocationCard";
+import { useNavigate } from "react-router-dom";
 
 const BookmarksPage = ({ user }) => {
   const [bookmarks, setBookmarks] = useState([]);
+  const navigate = useNavigate();
+
   useEffect(() => {
-    const fetchBookmarks = async () => {
-      try {
-        const response = await fetch(`/api/user/${user._id}/bookmarks`);
-        const { showBookmarks } = await response.json();
-        setBookmarks(showBookmarks.bookmarks);
-      } catch (error) {
-        console.log("Error fetching bookmarks:", error);
-      }
-    };
-    fetchBookmarks();
-  }, [user._id]);
+    if (!user) {
+      navigate("/");
+    } else {
+      const fetchBookmarks = async () => {
+        try {
+          const response = await fetch(`/api/user/${user._id}/bookmarks`);
+          const { showBookmarks } = await response.json();
+          setBookmarks(showBookmarks.bookmarks);
+        } catch (error) {
+          console.log("Error fetching bookmarks:", error);
+        }
+      };
+      fetchBookmarks();
+    }
+  }, [user]);
 
   return (
     <div>

@@ -7,13 +7,25 @@ const LocationReviews = ({ location, user }) => {
   const [locationReviews, setLocationReviews] = useState([]);
   const [content, setContent] = useState("");
   const [rating, setRating] = useState("5");
+  const [error, setError] = useState(null);
+
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", options);
+  };
 
   useEffect(() => {
     const fetchLocationReviews = async () => {
       try {
         const response = await fetch(`/api/location/${id}`);
         const data = await response.json();
-        setLocationReviews(data);
+        // Add a date property to each review
+        const reviewsWithDate = data.reviews.map((review) => ({
+          ...review,
+          date: new Date(review.createdAt).toLocaleDateString(),
+        }));
+        setLocationReviews({ ...data, reviews: reviewsWithDate });
       } catch (err) {
         console.error(err);
       }
@@ -24,6 +36,9 @@ const LocationReviews = ({ location, user }) => {
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
+      if (content.length < 4 || content.length > 100) {
+        throw new Error("Review must be between 4 and 100 characters.");
+      }
       const response = await fetch(`/api/reviews/${id}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -43,9 +58,11 @@ const LocationReviews = ({ location, user }) => {
       // Clear the form fields
       setContent("");
       setRating(0);
+      setError(null);
+      window.location.reload();
     } catch (error) {
       console.error(error);
-      window.alert(error.message);
+      setError(error.message);
     }
   };
 
@@ -89,7 +106,7 @@ const LocationReviews = ({ location, user }) => {
           locationReviews.reviews.map((review) => (
             <div
               key={review._id}
-              className="card w-60 h-40 bg-base-100 shadow-xl mb-4 border-2"
+              className="card w-60 h-60 bg-base-100 shadow-xl mb-10 border-2"
             >
               <div className="card-body flex flex-col">
                 <div className="flex justify-between items-center mb-2">
@@ -128,9 +145,17 @@ const LocationReviews = ({ location, user }) => {
                     <></>
                   )}
                 </div>
+                <p className="text-xs mb-3 flex gap-3">
+                  <img
+                    className="w-8 h-8"
+                    src="https://i.ibb.co/0YzqCQ4/children-playing-png-icon-transparent-png-modified.png"
+                    alt="icon"
+                  />
+                  {review.userName}
+                  <br />
+                  {formatDate(review.createdAt)}
+                </p>
                 <p className="text-sm">{review.content}</p>
-                <br />
-                <p className="text-xs">Review by {review.userName}</p>
               </div>
             </div>
           ))
@@ -199,6 +224,8 @@ const LocationReviews = ({ location, user }) => {
                 <textarea
                   className="textarea textarea-primary textarea-lg w-full max-w-xs"
                   value={content}
+                  minLength={4}
+                  maxLength={100}
                   onChange={(event) => setContent(event.target.value)}
                 />
               </label>
@@ -208,6 +235,7 @@ const LocationReviews = ({ location, user }) => {
               </button>
             </form>
           </div>
+          {error && <div className="text-red-500 text-sm mt-2">{error}</div>}
         </div>
       )}
     </>

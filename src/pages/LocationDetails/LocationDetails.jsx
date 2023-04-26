@@ -162,6 +162,28 @@ const LocationDetails = ({ user }) => {
         style={{ paddingTop: "20px" }}
       >
         {location.description}
+        <br />
+        <br />
+        <br />
+        Recommended for ages:{" "}
+        {location?.ageGroup?.sort()
+          .reduce((acc, curr) => {
+            const lowerBound = parseInt(curr.split("-")[0]);
+            const upperBound = parseInt(curr.split("-")[1]);
+            const last = acc[acc.length - 1];
+            if (last && lowerBound === last.upperBound) {
+              last.upperBound = upperBound;
+              return acc.slice(0, -1).concat(last);
+            }
+            return acc.concat({ lowerBound, upperBound });
+          }, [])
+          .map(({ lowerBound, upperBound }) => {
+            if (upperBound === 18) {
+              return `${lowerBound}+ years old`;
+            }
+            return `${lowerBound}-${upperBound} years old`;
+          })
+          .join(", ")}
       </div>
       <>
         <div className="w-10/12 text-justify ps-40 my-5 flex">

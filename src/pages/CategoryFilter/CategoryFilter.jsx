@@ -36,7 +36,6 @@ const CategoryFilter = ({ handleFilter }) => {
 
   return (
     <>
-    
       <div className="flex flex-wrap ml-3 mt-8 mb-5 gap-2">
         <label className="text-2xl">
           <strong>Filter by</strong>
@@ -49,7 +48,7 @@ const CategoryFilter = ({ handleFilter }) => {
           <label>
             <input
               type="radio"
-              name="radio-2"
+              name="locationType"
               className="radio radio-primary radio-xs"
               value="Playground"
               checked={locationType === "Playground"}
@@ -68,7 +67,7 @@ const CategoryFilter = ({ handleFilter }) => {
           <label>
             <input
               type="radio"
-              name="radio-2"
+              name="locationType"
               className="radio radio-primary radio-xs"
               value="Pool"
               checked={locationType === "Pool"}
@@ -89,6 +88,7 @@ const CategoryFilter = ({ handleFilter }) => {
           <label>
             <input
               type="checkbox"
+              name="ageGroup"
               className="checkbox checkbox-primary checkbox-xs"
               value="0-2"
               checked={selectedAgeGroups.includes("0-2")}
@@ -101,6 +101,7 @@ const CategoryFilter = ({ handleFilter }) => {
           <label>
             <input
               type="checkbox"
+              name="ageGroup"
               className="checkbox checkbox-primary checkbox-xs"
               value="2-4"
               checked={selectedAgeGroups.includes("2-4")}
@@ -113,6 +114,7 @@ const CategoryFilter = ({ handleFilter }) => {
           <label>
             <input
               type="checkbox"
+              name="ageGroup"
               className="checkbox checkbox-primary checkbox-xs"
               value="4-6"
               checked={selectedAgeGroups.includes("4-6")}
@@ -125,6 +127,7 @@ const CategoryFilter = ({ handleFilter }) => {
           <label>
             <input
               type="checkbox"
+              name="ageGroup"
               className="checkbox checkbox-primary checkbox-xs"
               value="6-8"
               checked={selectedAgeGroups.includes("6-8")}
