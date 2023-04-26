@@ -66,8 +66,8 @@ const LocationDetails = ({ user }) => {
 
   return (
     <>
-      <div className="w-10/12 text-justify ps-40 my-8 flex items-center">
-        <h1 className="text-4xl font-bold">{location.locationName}</h1>
+      <div className="w-10/12 text-justify my-8 flex items-center justify-between">
+        <h1 className="text-4xl font-bold pl-40">{location.locationName}</h1>
       </div>
       <div className="flex items-center ps-40 my-4">
         <img
@@ -83,17 +83,34 @@ const LocationDetails = ({ user }) => {
             <img
               src={location.image}
               className="h-full w-full object-cover rounded-lg"
-              style={{ width: "800px", height: "460px", opacity: 0.9 }}
+              style={{ width: "800px", height: "510px", opacity: 0.9 }}
             />
           </div>
         </div>
         <div className="w-1/7 lg:pl-0">
           <div
+            className="grid h-16 mb-2 card bg-base-200 rounded-box place-items-center rounded-lg"
+            style={{ height: "180px", width: "400px" }}
+          >
+            {location.locationType === "Pool" ? (
+              <img
+                className="w-96 h-36 rounded-lg object-cover opacity-90"
+                src="https://hips.hearstapps.com/hmg-prod/images/what-parents-shouldnt-let-kids-do-at-pool-1529945762.jpg"
+              />
+            ) : (
+              <img
+                className="w-96 h-36 rounded-lg object-cover opacity-90"
+                src="https://shopsinsg.com/wp-content/uploads/2020/03/indoor-playground-in-singapore.jpg"
+              />
+            )}
+          </div>
+
+          <div
             className="grid h-32 card bg-base-200 rounded-box place-items-center rounded-lg"
-            style={{ height: "460px", width: "400px" }}
+            style={{ height: "280px", width: "400px" }}
           >
             <div
-              className="grid h-4/5 bg-base-200 rounded-box place-items-center rounded-lg"
+              className="grid h-4/5 mt-2 mb-2 bg-base-200 rounded-box place-items-center rounded-lg"
               style={{ height: "100%", width: "100%", borderRadius: "0.5rem" }}
             >
               <LocationMap
@@ -109,9 +126,9 @@ const LocationDetails = ({ user }) => {
           </div>
         </div>
       </div>
-      <div className="w-9/12 h-6 text-justify py-9 mx-40 my-8 rounded-lg">
+      <div className="w-9/12 h-6 text-justify py-6 mx-40 my-8 rounded-lg">
         <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Description</h1>
+          <h1 className="text-2xl font-bold">Description </h1>
           {!user ? (
             <></>
           ) : (
@@ -141,15 +158,19 @@ const LocationDetails = ({ user }) => {
         <div></div>
       </div>
       <div
-        className="w-7/12 h-auto text-justify ps-40 mb-20 text-gray-800 text-sm tracking-wide"
+        className="w-7/12 h-auto text-justify ps-40 mb-16 text-gray-800 text-sm tracking-wide"
         style={{ paddingTop: "20px" }}
       >
         {location.description}
       </div>
-
       <>
         <div className="w-10/12 text-justify ps-40 my-5 flex">
-          <h1 className="text-2xl font-bold">View All Reviews </h1>
+          <h1 className="text-2xl font-bold">View All Reviews</h1>
+          <img
+            className="ml-3 w-8 h-8"
+            src="https://i.ibb.co/F54cRjT/star.jpg"
+            alt="star"
+          />
         </div>
         <LocationReviews location={location} user={user} />
       </>

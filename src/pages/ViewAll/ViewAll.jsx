@@ -67,7 +67,7 @@ const ViewAll = ({ user }) => {
           filteredLocations.map((location) => (
             <div
               key={location._id}
-              className="card card-compact w-48 bg-base-100 shadow-xl"
+              className="card card-compact w-52 bg-base-100 shadow-xl"
             >
               <LocationCard location={location} user={user} />
             </div>
