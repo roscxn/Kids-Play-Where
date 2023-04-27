@@ -1,6 +1,6 @@
 # Kids-Play-Where
 
-Welcome to Kids Play Where, the ultimate app for parents looking to discover safe and fun play areas for their little ones. The app is built using the MERN stack and styled with the sleek Tailwind CSS framework and DaisyUi, ensuring a seamless and visually appealing user experience. With the intuitive map leaflet feature, parents/ guardians can easily locate nearby pools and playgrounds, complete with reviews and ratings from other users. Let the adventure begin!
+Welcome to Kids Play Where, the ultimate app for parents looking to discover safe and fun play areas for their little ones. The app is built using the MERN stack and styled with the sleek Tailwind CSS framework and DaisyUI, ensuring a seamless and visually appealing user experience. With the intuitive map leaflet feature, parents/ guardians can easily locate nearby pools and playgrounds, complete with reviews and ratings from other users. Let the adventure begin!
 
 #### <a href="https://kids-play-where.onrender.com/">Access the application here</a>. 
 
