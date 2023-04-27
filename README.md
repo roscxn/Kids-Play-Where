@@ -1,6 +1,6 @@
 # Kids-Play-Where
 
-Discover safe and fun play areas for kids with reviews from other users. Using MERN stack and Leaflet maps, easily locate play areas in Singapore with a sleek design utilizing Tailwind CSS and DaisyUI.
+Welcome to Kids Play Where, the ultimate app for parents looking to discover safe and fun play areas for their little ones. The app is built using the MERN stack and styled with the sleek Tailwind CSS framework and DaisyUi, ensuring a seamless and visually appealing user experience. With the intuitive map leaflet feature, parents/ guardians can easily locate nearby pools and playgrounds, complete with reviews and ratings from other users. Let the adventure begin!
 
 #### <a href="https://kids-play-where.onrender.com/">Access the application here</a>. 
 
